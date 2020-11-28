@@ -24,11 +24,11 @@
 
 | Column                 | Type    | Options                        |
 | ---------------------- | ------- | ------------------------------ |
-| item_name              | string  | null: false                    |
+| name                   | string  | null: false                    |
 | description            | text    | null: false                    |
 | category_id            | integer | null: false                    |
+| price                  | integer | null: false                    |
 | status_id              | integer | null: false                    |
-| price_id               | integer | null: false                    |
 | delivery_fee_bearer_id | integer | null: false                    |
 | sender_area_id         | integer | null: false                    |
 | shipping_date_id       | integer | null: false                    |
@@ -55,26 +55,25 @@
 
 | Column         | Type    | Options                        |
 | -------------- | ------- | ------------------------------ |
-| order_date     | integer | null: false                    |
 | user_id        | integer | null: false, foreign_key: true |
 | item_id        | integer | null: false, foreign_key: true |
 
 ### Order model association
 - belongs_to :user
-- has_one :item
+- belongs_to :item
 - has_one :destination
 
 ## destinations table
 
-| Column                    | Type    | Options                        |
-| --------------------------| ------- | ------------------------------ |
-| destination_postal_code   | string  | null: false                    |
-| destination_prefecture_id | integer | null: false                    |
-| destination_city          | string  | null: false                    |
-| destination_house_number  | string  | null: false                    |
-| destination_building      | string  | null: false                    |
-| destination_phone         | string  | null: false                    |
-| order_id                  | integer | null: false, foreign_key: true |
+| Column        | Type    | Options                        |
+| --------------| ------- | ------------------------------ |
+| postal_code   | string  | null: false                    |
+| prefecture_id | integer | null: false                    |
+| city          | string  | null: false                    |
+| house_number  | string  | null: false                    |
+| building      | string  | null: false                    |
+| phone         | string  | null: false                    |
+| order_id      | integer | null: false, foreign_key: true |
 
 ### Destination model
-- has_one :order
+- belongs_to :order
