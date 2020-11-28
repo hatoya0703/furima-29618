@@ -4,16 +4,16 @@
 
 ## users table
 
-| Column                | Type    | Options      |
-| --------------------- | ------- | ------------ |
-| nickname              | string  | null: false  |
-| email                 | string  | null: false  |
-| encrypted_password    | string  | null: false  |
-| first_name            | string  | null: false  |
-| last_name             | string  | null: false  |
-| kana_first_name       | string  | null: false  |
-| kana_last_name        | string  | null: false  |
-| birth_date            | date    | null: false  |
+| Column                | Type    | Options                 |
+| --------------------- | ------- | ----------------------- |
+| nickname              | string  | null: false             |
+| email                 | string  | null: false unique:true |
+| encrypted_password    | string  | null: false             |
+| first_name            | string  | null: false             |
+| last_name             | string  | null: false             |
+| kana_first_name       | string  | null: false             |
+| kana_last_name        | string  | null: false             |
+| birth_date            | date    | null: false             |
 
 ### User model association
 - has_many :items
@@ -71,7 +71,7 @@
 | prefecture_id | integer | null: false                    |
 | city          | string  | null: false                    |
 | house_number  | string  | null: false                    |
-| building      | string  | null: false                    |
+| building      | string  |                                |
 | phone         | string  | null: false                    |
 | order_id      | integer | null: false, foreign_key: true |
 
