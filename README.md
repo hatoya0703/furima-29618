@@ -1,79 +1,24 @@
 # README
 
-# MODEL DESIGN
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-## users table
+Things you may want to cover:
 
-| Column                | Type    | Options                 |
-| --------------------- | ------- | ----------------------- |
-| nickname              | string  | null: false             |
-| email                 | string  | null: false unique:true |
-| encrypted_password    | string  | null: false             |
-| first_name            | string  | null: false             |
-| last_name             | string  | null: false             |
-| kana_first_name       | string  | null: false             |
-| kana_last_name        | string  | null: false             |
-| birth_date            | date    | null: false             |
+* Ruby version
 
-### User model association
-- has_many :items
-- has_many :comments
-- has_many :orders
+* System dependencies
 
-## items table
+* Configuration
 
-| Column                 | Type    | Options                        |
-| ---------------------- | ------- | ------------------------------ |
-| name                   | string  | null: false                    |
-| description            | text    | null: false                    |
-| category_id            | integer | null: false                    |
-| price                  | integer | null: false                    |
-| status_id              | integer | null: false                    |
-| delivery_fee_bearer_id | integer | null: false                    |
-| sender_area_id         | integer | null: false                    |
-| shipping_date_id       | integer | null: false                    |
-| user_id                | integer | null: false, foreign_key: true |
+* Database creation
 
-### Item model association
-- belongs_to :user
-- has_many :comments
-- has_one :order
+* Database initialization
 
-## comments table
+* How to run the test suite
 
-| Column  | Type    | Options                        |
-| ------- | ------- | ------------------------------ |
-| content | text    | null: false                    |
-| user_id | integer | null: false, foreign_key: true |
-| item_id | integer | null: false, foreign_key: true |
+* Services (job queues, cache servers, search engines, etc.)
 
-### Comment model association
-- belongs_to :user
-- belongs_to :item
+* Deployment instructions
 
-## orders table
-
-| Column         | Type    | Options                        |
-| -------------- | ------- | ------------------------------ |
-| user_id        | integer | null: false, foreign_key: true |
-| item_id        | integer | null: false, foreign_key: true |
-
-### Order model association
-- belongs_to :user
-- belongs_to :item
-- has_one :destination
-
-## destinations table
-
-| Column        | Type    | Options                        |
-| --------------| ------- | ------------------------------ |
-| postal_code   | string  | null: false                    |
-| prefecture_id | integer | null: false                    |
-| city          | string  | null: false                    |
-| house_number  | string  | null: false                    |
-| building      | string  |                                |
-| phone         | string  | null: false                    |
-| order_id      | integer | null: false, foreign_key: true |
-
-### Destination model
-- belongs_to :order
+* ...
