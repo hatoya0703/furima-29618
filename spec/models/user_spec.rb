@@ -55,7 +55,6 @@ RSpec.describe User, type: :model do
       it "passwordとpassword_confirmationが等しくなければ登録できない" do
         @user.password_confirmation = @user.password + "5678"
         @user.valid?
-        binding.pry
         expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
       end
       it "first_nameが空では登録できない" do
