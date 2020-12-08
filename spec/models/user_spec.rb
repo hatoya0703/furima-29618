@@ -86,22 +86,20 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include("Kana first name can't be blank")
       end
 
-      describe "kana_first_nameがカタカナ以外では登録できない" do
-        it "漢字では登録できない" do
-          @user.kana_first_name = "山田"
-          @user.valid?
-          expect(@user.errors.full_messages).to include("Kana first name is invalid")
-        end
-        it "ひらがなでは登録できない" do
-          @user.kana_first_name = "やまだ"
-          @user.valid?
-          expect(@user.errors.full_messages).to include("Kana first name is invalid")
-        end
-        it "英語では登録できない" do
-          @user.kana_first_name = "yamada"
-          @user.valid?
-          expect(@user.errors.full_messages).to include("Kana first name is invalid")
-        end
+      it "kana_first_name漢字では登録できない" do
+        @user.kana_first_name = "山田"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Kana first name is invalid")
+      end
+      it "kana_first_nameひらがなでは登録できない" do
+        @user.kana_first_name = "やまだ"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Kana first name is invalid")
+      end
+      it "kana_first_name英語では登録できない" do
+        @user.kana_first_name = "yamada"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Kana first name is invalid")
       end
 
       it "kana_last_nameが空では登録できない" do
@@ -110,24 +108,22 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include("Kana last name can't be blank")
       end
 
-      describe "kana_last_nameがカタカナ以外では登録できない" do
-        it "漢字では登録できない" do
-          @user.kana_last_name = "太郎"
-          @user.valid?
-          expect(@user.errors.full_messages).to include("Kana last name is invalid")
-        end
-        it "ひらがなでは登録できない" do
-          @user.kana_last_name = "たろう"
-          @user.valid?
-          expect(@user.errors.full_messages).to include("Kana last name is invalid")
-        end
-        it "英語では登録できない" do
-          @user.kana_last_name = "tarou"
-          @user.valid?
-          expect(@user.errors.full_messages).to include("Kana last name is invalid")
-        end
+      it "kana_last_nameが漢字では登録できない" do
+        @user.kana_last_name = "太郎"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Kana last name is invalid")
       end
-
+      it "kana_last_nameがひらがなでは登録できない" do
+        @user.kana_last_name = "たろう"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Kana last name is invalid")
+      end
+      it "kana_last_nameが英語では登録できない" do
+        @user.kana_last_name = "tarou"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Kana last name is invalid")
+      end
+      
       it "birth_dateが空では登録できない" do
         @user.birth_date = ""
         @user.valid?
