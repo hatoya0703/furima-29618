@@ -7,4 +7,8 @@ class SenderArea < ActiveHash::Base
     { id: 5, name: '一週間以上' },
     { id: 6, name: '要相談' }
   ]
+
+  include ActiveHash::Associations
+  has_many :items
+
   end

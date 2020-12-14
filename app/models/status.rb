@@ -7,4 +7,8 @@ class Status < ActiveHash::Base
     { id: 5, name: 'やや悪い' },
     { id: 6, name: '悪い' }
   ]
+  
+  include ActiveHash::Associations
+  has_many :items
+
   end

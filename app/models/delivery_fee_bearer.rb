@@ -8,4 +8,8 @@ class DeliveryFeeBearer < ActiveHash::Base
     { id: 6, name: '400' },
     { id: 7, name: '500' }
   ]
+
+  include ActiveHash::Associations
+  has_many :items
+
   end
