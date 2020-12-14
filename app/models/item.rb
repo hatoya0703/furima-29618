@@ -9,5 +9,17 @@ class Item < ApplicationRecord
   belongs_to :shipping_date
 
   # バリデーション
-  
+  with_options presence: true do
+    validates :name
+    validates :description
+    validates :price
+    validates :user_id, foreign_key: true
+  end
+  with_options numericality: { other_than: 1 } do
+    validates :category_id
+    validates :status_id
+    validates :delivery_fee_bearer_id
+    validates :sender_area_id
+    validates :shipping_date_id
+  end
 end
