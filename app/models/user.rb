@@ -2,6 +2,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  # アソシエーション
+  has_many :items
+
+  # バリデーション
   with_options presence: true do
     validates :nickname
     validates :email, uniqueness: true,
