@@ -7,7 +7,6 @@ RSpec.describe Item, type: :model do
       @item = FactoryBot.build(:item)
       @item.image = fixture_file_upload('item_sample.png')
       @item.user_id = @user.id
-      binding.pry
     end
 
     context '正常に出品できるとき' do
