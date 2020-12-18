@@ -1,6 +1,6 @@
-class SenderArea < ActiveHash::Base
+class ShippingDate < ActiveHash::Base
   self.data = [
-    { id: 1, name: '当日' },
+    { id: 1, name: '--' },
     { id: 2, name: '翌日' },
     { id: 3, name: '2~3日後' },
     { id: 4, name: '1週間以内' },
@@ -10,5 +10,4 @@ class SenderArea < ActiveHash::Base
 
   include ActiveHash::Associations
   has_many :items
-
-  end
+end
