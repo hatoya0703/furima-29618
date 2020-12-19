@@ -2,12 +2,16 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  # アソシエーション
+  has_many :items
+
+  # バリデーション
   with_options presence: true do
     validates :nickname
     validates :email, uniqueness: true,
-              format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
+                      format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
     validates :password, length: { minimum: 6 },
-              format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]{8,100}+\z/i }
+                         format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]{8,100}+\z/i }
     with_options format: { with: /\A[ぁ-んァ-ヶ一-龥々]+\z/ } do
       validates :first_name
       validates :last_name

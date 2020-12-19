@@ -1,4 +1,4 @@
-class DeliveryFeeBearer < AvtiveHash::Base
+class DeliveryFeeBearer < ActiveHash::Base
   self.data = [
     { id: 1, name: '--' },
     { id: 2, name: '0' },
