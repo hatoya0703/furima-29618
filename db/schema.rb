@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 2020_12_14_071203) do
     t.string "kana_first_name", null: false
     t.string "kana_last_name", null: false
     t.date "birth_date", null: false
+    t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
