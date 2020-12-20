@@ -26,16 +26,15 @@ class ItemsController < ApplicationController
   def edit
     # 出品者以外がeditアクションに遷移しようとした場合、showアクションに遷移させる
     if current_user.id != @item.user_id
-      redirect_to item_path(@item.id)
+      redirect_to root_path
     end
   end
 
   def update
     # ログインユーザーと出品者が同一でなければshowアクションに遷移させる
     if current_user.id == @item.user_id
-      @item.update(item_params)
-      # 保存に失敗した時はeditアクションに遷移させる
-      if @item.valid?
+      # 更新に成功したらshowアクションにリダイレクト、失敗した時は編集画面へ遷移させる
+      if @item.update(item_params)
         redirect_to item_path(@item.id)
       else
         render :edit
