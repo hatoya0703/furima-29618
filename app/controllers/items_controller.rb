@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_item, only: [:show, :destroy]
+  before_action :set_item, only: [:show, :destroy, :edit, :update]
   def index
     @items = Item.all.order("created_at DESC")
   end
@@ -15,6 +15,7 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
+    # 保存に失敗した時はnewアクションに遷移させる
     if @item.save
       redirect_to root_path
     else
@@ -23,17 +24,34 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    # 出品者以外がeditアクションに遷移しようとした場合、showアクションに遷移させる
+    if current_user.id != @item.user_id
+      redirect_to item_path(@item.id)
+    end
   end
 
   def update
+    # ログインユーザーと出品者が同一でなければshowアクションに遷移させる
+    if current_user.id == @item.user_id
+      @item.update(item_params)
+      # 保存に失敗した時はeditアクションに遷移させる
+      if @item.valid?
+        redirect_to item_path(@item.id)
+      else
+        render :edit
+      end
+    else
+      redirect_to item_path(@item.id)
+    end
   end
 
-  def destroy    
-    if user_signed_in? && current_user.id == @item.user_id
+  def destroy
+    # ログインユーザーと出品者が同一でなければshowアクションに遷移させる
+    if current_user.id == @item.user_id
       @item.destroy
       redirect_to root_path
     else
-      render :show
+      redirect_to item_path(@item.id)
     end
 
   end
