@@ -4,7 +4,8 @@ class User < ApplicationRecord
 
   # アソシエーション
   has_many :items
-
+  has_many :orders
+  
   # バリデーション
   with_options presence: true do
     validates :nickname
