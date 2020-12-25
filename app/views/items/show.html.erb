@@ -8,11 +8,13 @@
     </h2>
     <div class='item-img-content'>
       <%= image_tag @item.image ,class:"item-box-img" %>
-      <%# 商品が売れている場合は、sold outを表示しましょう %>
-      <div class='sold-out'>
-        <span>Sold Out!!</span>
-      </div>
-      <%# //商品が売れている場合は、sold outを表示しましょう %>
+      <%# 商品が売れていればsold outを表示する %>
+      <% unless Order.find_by(item_id:@item.id).nil? %>
+        <div class='sold-out'>
+          <span>Sold Out!!</span>
+        </div>
+      <% end %>
+      <%# /商品が売れていればsold outを表示する %>
     </div>
     <div class="item-price-box">
       <span class="item-price">
@@ -31,13 +33,15 @@
     <% end %>
     <%# ログインしているユーザーと出品しているユーザーが、同一である場合のみ表示 %>
   
-    <%# ログインしており、出品しているユーザーでない時に表示%>
-    <%# 商品が売れていない場合はこちらを表示しましょう(購入機能実装時に実装) %>
-    <% if user_signed_in? && current_user.id != @item.user_id %>
-      <%= link_to '購入画面に進む', "#" ,class:"item-red-btn"%>
+    <%# 商品が購入されていない時に表示%>
+    <% if Order.find_by(item_id:@item.id).nil? %>
+      <%# ログインしており、出品しているユーザーでない時に表示%>
+      <% if user_signed_in? && current_user.id != @item.user_id %>
+        <%= link_to '購入画面に進む', item_orders_path(@item.id) ,class:"item-red-btn"%>
+      <% end %>
+      <%# /ログインしており、出品しているユーザーでない時に表示%>
     <% end %>
-    <%# //商品が売れていない場合はこちらを表示しましょう %>
-    <%# ログインしており、出品しているユーザーでない時に表示%>
+    <%# /商品が購入されていない時に表示%>
 
 
 
