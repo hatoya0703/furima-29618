@@ -10,7 +10,10 @@ class OrderDestination
     validates :city
     validates :house_number
     validates :phone, format: { with: /\A[0-9]{,11}\z/}
+    validates :user_id
+    validates :item_id
     validates :token
+
   end
 
   def save
