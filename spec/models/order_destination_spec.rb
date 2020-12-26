@@ -3,7 +3,11 @@ require 'rails_helper'
 RSpec.describe OrderDestination, type: :model do
   describe '商品購入機能' do
     before do
+      @user = FactoryBot.create(:user)
+      @item = FactoryBot.create(:item)
       @order = FactoryBot.build(:order_destination)
+      @order.user_id = @user.id
+      @order.item_id = @item.id
     end
     context '商品が正常に購入できる' do
       it 'すべての値が正しく入力されていれば購入ができること' do
@@ -49,6 +53,16 @@ RSpec.describe OrderDestination, type: :model do
         @order.phone = "012-345-678"
         @order.valid?
         expect(@order.errors.full_messages).to include("Phone is invalid")
+      end
+      it 'user_idが空だと購入できない' do
+        @order.user_id = ""
+        @order.valid?
+        expect(@order.errors.full_messages).to include("User can't be blank")
+      end
+      it 'item_idが空だと購入できない' do
+        @order.item_id = ""
+        @order.valid?
+        expect(@order.errors.full_messages).to include("Item can't be blank")
       end
       it 'tokenが空だと購入できない' do
         @order.token = ""
