@@ -49,6 +49,12 @@ RSpec.describe OrderDestination, type: :model do
         @order.valid?
         expect(@order.errors.full_messages).to include("Phone can't be blank")
       end
+      it 'phoneが12桁以上だと購入できない' do
+        @order.phone = Faker::PhoneNumber.subscriber_number(length: 12)
+        binding.pry
+        @order.valid?
+        expect(@order.errors.full_messages).to include("Phone is invalid")
+      end
       it 'phoneにハイフン(半角数字以外の文字)が入っていると購入できない' do
         @order.phone = "012-345-678"
         @order.valid?
