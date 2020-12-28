@@ -9,7 +9,7 @@
     <div class='item-img-content'>
       <%= image_tag @item.image ,class:"item-box-img" %>
       <%# 商品が売れていればsold outを表示する %>
-      <% unless Order.find_by(item_id:@item.id).nil? %>
+      <% unless @item.order.nil? %>
         <div class='sold-out'>
           <span>Sold Out!!</span>
         </div>
@@ -34,7 +34,7 @@
     <%# ログインしているユーザーと出品しているユーザーが、同一である場合のみ表示 %>
   
     <%# 商品が購入されていない時に表示%>
-    <% if Order.find_by(item_id:@item.id).nil? %>
+    <% if @item.order.nil? %>
       <%# ログインしており、出品しているユーザーでない時に表示%>
       <% if user_signed_in? && current_user.id != @item.user_id %>
         <%= link_to '購入画面に進む', item_orders_path(@item.id) ,class:"item-red-btn"%>
