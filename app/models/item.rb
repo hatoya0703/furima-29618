@@ -8,6 +8,7 @@ class Item < ApplicationRecord
   belongs_to :delivery_fee_bearer
   belongs_to :sender_area
   belongs_to :shipping_date
+  has_one :order
 
   # バリデーション
   with_options presence: true do

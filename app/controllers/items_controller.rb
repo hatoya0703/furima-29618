@@ -2,11 +2,10 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_item, only: [:show, :destroy, :edit, :update]
   def index
-    @items = Item.all.order("created_at DESC")
+    @items = Item.all.order('created_at DESC')
   end
 
   def show
-    
   end
 
   def new
@@ -25,9 +24,7 @@ class ItemsController < ApplicationController
 
   def edit
     # 出品者以外がeditアクションに遷移しようとした場合、showアクションに遷移させる
-    if current_user.id != @item.user_id
-      redirect_to root_path
-    end
+    redirect_to root_path if current_user.id != @item.user_id
   end
 
   def update
@@ -52,7 +49,6 @@ class ItemsController < ApplicationController
     else
       redirect_to item_path(@item.id)
     end
-
   end
 
   private
