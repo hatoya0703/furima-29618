@@ -34,6 +34,11 @@ RSpec.describe OrderDestination, type: :model do
         @order.valid?
         expect(@order.errors.full_messages).to include("Prefecture can't be blank")
       end
+      it 'prefecture_idが0だと購入できない' do
+        @order.prefecture_id = '0'
+        @order.valid?
+        expect(@order.errors.full_messages).to include('Prefecture must be other than 0')
+      end
       it 'cityが空だと購入できない' do
         @order.city = ''
         @order.valid?
@@ -51,7 +56,6 @@ RSpec.describe OrderDestination, type: :model do
       end
       it 'phoneが12桁以上だと購入できない' do
         @order.phone = Faker::PhoneNumber.subscriber_number(length: 12)
-        binding.pry
         @order.valid?
         expect(@order.errors.full_messages).to include('Phone is invalid')
       end
